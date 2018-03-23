@@ -12,3 +12,11 @@ Freeman A. (2017) Pro ASP.NET Core MVC 2. Apress, Berkeley, CA
 
 * Create an empty project using the ASP.NET Core Web Application (.NET Core) template. Ensured that .NET Core and ASP.NET Core 2.0
 are selected in the menus at the top of the dialog window.
+
+
+&nbsp;
+### 01 Basic MVC boilerplate
+
+* Add the *Models*, *Controllers* and *Views* folders.
+* Edit *Startup.cs*.
+* Add -> New Item -> Razor View Imports and edit the *_ViewImports.cshtml*.
