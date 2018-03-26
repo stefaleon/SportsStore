@@ -35,3 +35,10 @@ are selected in the menus at the top of the dialog window.
 
 * Add the *Product* class.
 * Add the *IProductRepository* interface. It uses `IQueryable<T>` to allow a caller to obtain a sequence of Product objects. The `IQueryable<T>` interface is derived from the more familiar `IEnumerable<T>` interface and represents a collection of objects that can be queried, such as those managed by a database.
+
+
+&nbsp;
+### 04 Creating a Fake Repository
+
+* Add the *FakeProductRepository* class, which inherits from *IProductRepository*.
+It implements the *IProductRepository* interface by returning a fixed collection of *Product* objects as the value of the *Products* property. The *AsQueryable* method is used to convert the fixed collection of objects to an *IQueryable<Product>*, which is required to implement the *IProductRepository* interface and allows to create a compatible fake repository without having to deal with real queries. 
