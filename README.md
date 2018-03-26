@@ -20,3 +20,11 @@ are selected in the menus at the top of the dialog window.
 * Add the *Models*, *Controllers* and *Views* folders.
 * Edit *Startup.cs*.
 * Add -> New Item -> Razor View Imports and edit the *_ViewImports.cshtml*.
+
+
+&nbsp;
+### 02 Add the unit testing project
+
+* Add -> New Project -> xUnit Test Project (.NET Core) -> SportsStore.Tests 
+* In SportsStore.Tests dependencies, add a reference to SportsStore.csproj.
+* Add the *Moq* package.
