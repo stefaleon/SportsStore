@@ -41,7 +41,8 @@ are selected in the menus at the top of the dialog window.
 ### 04 Create a Fake Repository
 
 * Add the *FakeProductRepository* class, which inherits from *IProductRepository*.
-It implements the *IProductRepository* interface by returning a fixed collection of *Product* objects as the value of the *Products* property. The *AsQueryable* method is used to convert the fixed collection of objects to an *IQueryable<Product>*, which is required to implement the *IProductRepository* interface and allows to create a compatible fake repository without having to deal with real queries. 
+It implements the *IProductRepository* interface by returning a fixed collection of *Product* objects as the value of the *Products* property.
+* The *AsQueryable* method is used to convert the fixed collection of objects to an `IQueryable<Product>`, which is required to implement the *IProductRepository* interface and allows to create a compatible fake repository without having to deal with real queries. 
 
 
 
@@ -65,6 +66,17 @@ It implements the *IProductRepository* interface by returning a fixed collection
 * This is known as **dependency injection**, and its approach allows the *ProductController* constructor to access the application’s repository through the *IProductRepository* interface without having any need to know which implementation class has been configured. Later, the fake repository will be replaced with the real
 one, and the controller will continue to work without changes.
 * Add an action method, called *List*, which will render a view showing the complete list of the products in the repository. 
-* Calling the *View8 method without specifying a view name, tells MVC to render the default view for the action method.
+* Calling the *View* method without specifying a view name, tells MVC to render the default view for the action method.
 * Passing the collection of *Product* objects from the repository to the *View* method
 provides the framework with the data with which to populate the Model object in a strongly typed view.
+
+
+&nbsp;
+### 07 Add Views
+
+* Create a shared layout that will define common content that will be included in all HTML responses sent to clients. Created the *Views/Shared* folder and add `_Layout.cshtml`.
+* Configure the application so that the `_Layout.cshtml` file is applied by default. Add an MVC View Start Page file called `_ViewStart.cshtml` to the Views folder.
+* Add the view that will be displayed when the *List* action method is used to handle a request. Create the *Views/Product* folder and add to it a Razor view file called * List.cshtml*. 
+* The *@model* expression at the top of the file specifies that the view will receive a sequence of *Product* objects from the action method as its model data. A *@foreach* expression  works through the sequence and generates a simple set of HTML elements for each *Product* object that is received.
+* The *Price* property is converted to a string using the `ToString("c"`) method, which renders numerical values as currency according to the culture settings that are in effect on the server.
+* The view deals only with how details of each *Product* is displayed using HTML elements, which is consistent with the **separation of concerns**. 
