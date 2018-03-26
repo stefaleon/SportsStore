@@ -10,7 +10,7 @@ Freeman A. (2017) Pro ASP.NET Core MVC 2. Apress, Berkeley, CA
 &nbsp;
 ### 00 Create an empty MVC Project
 
-* Create an empty project using the ASP.NET Core Web Application (.NET Core) template. Ensured that .NET Core and ASP.NET Core 2.0
+* Create an empty project using the ASP.NET Core Web Application (.NET Core) template. Ensure that .NET Core and ASP.NET Core 2.0
 are selected in the menus at the top of the dialog window.
 
 
@@ -28,3 +28,10 @@ are selected in the menus at the top of the dialog window.
 * Add -> New Project -> xUnit Test Project (.NET Core) -> SportsStore.Tests 
 * In SportsStore.Tests dependencies, add a reference to SportsStore.csproj.
 * Add the *Moq* package.
+
+
+&nbsp;
+### 03 Start the Domain Model
+
+* Add the *Product* class.
+* Add the *IProductRepository* interface. It uses `IQueryable<T>` to allow a caller to obtain a sequence of Product objects. The `IQueryable<T>` interface is derived from the more familiar `IEnumerable<T>` interface and represents a collection of objects that can be queried, such as those managed by a database.
