@@ -38,7 +38,14 @@ are selected in the menus at the top of the dialog window.
 
 
 &nbsp;
-### 04 Creating a Fake Repository
+### 04 Create a Fake Repository
 
 * Add the *FakeProductRepository* class, which inherits from *IProductRepository*.
 It implements the *IProductRepository* interface by returning a fixed collection of *Product* objects as the value of the *Products* property. The *AsQueryable* method is used to convert the fixed collection of objects to an *IQueryable<Product>*, which is required to implement the *IProductRepository* interface and allows to create a compatible fake repository without having to deal with real queries. 
+
+
+
+&nbsp;
+### 05 Register the Repository Service
+
+* Create a repository service, which allows controllers to get objects that implement the *IProductRepository* interface without knowing which class is being used. Start developing the application using the simple *FakeProductRepository* class and then replace it with a real repository later without having to make changes in all of the classes that need access to the repository. Services are registered in the *ConfigureServices* method of the *Startup* class. The *AddTransient* method specifies that a new *FakeProductRepository* object should be created each time the *IProductRepository* interface is needed.
