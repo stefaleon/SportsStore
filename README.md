@@ -80,3 +80,14 @@ provides the framework with the data with which to populate the Model object in 
 * The *@model* expression at the top of the file specifies that the view will receive a sequence of *Product* objects from the action method as its model data. A *@foreach* expression  works through the sequence and generates a simple set of HTML elements for each *Product* object that is received.
 * The *Price* property is converted to a string using the `ToString("c"`) method, which renders numerical values as currency according to the culture settings that are in effect on the server.
 * The view deals only with how details of each *Product* is displayed using HTML elements, which is consistent with the **separation of concerns**. 
+
+
+
+&nbsp;
+### 08 Set the Default Route
+
+* MVC should send requests that arrive for the root URL of the application *(http://
+mysite/)* to the *List* action method in the *ProductController* class. Edit the statement in the *Startup* class that sets up the MVC classes that handle HTTP requests.
+* The *Configure* method of the *Startup* class is used to set up the request pipeline, which consists of classes (known as middleware) that will inspect HTTP requests and generate responses. The *UseMvc* method sets up the MVC middleware, and one of the configuration options is the scheme that will be used to map URLs to controllers and action methods.
+* The default route is set so that MVC sends requests to the *List* action method of the *Product* controller unless the request URL specifies otherwise.
+* Now the app presents the fake data when run.
