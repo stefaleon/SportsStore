@@ -25,7 +25,7 @@ are selected in the menus at the top of the dialog window.
 &nbsp;
 ### 02 Add the unit testing project
 
-* Add -> New Project -> xUnit Test Project (.NET Core) -> SportsStore.Tests 
+* Add -> New Project -> xUnit Test Project (.NET Core) -> SportsStore.Tests
 * In SportsStore.Tests dependencies, add a reference to SportsStore.csproj.
 * Add the *Moq* package.
 
@@ -42,7 +42,7 @@ are selected in the menus at the top of the dialog window.
 
 * Add the *FakeProductRepository* class, which inherits from *IProductRepository*.
 It implements the *IProductRepository* interface by returning a fixed collection of *Product* objects as the value of the *Products* property.
-* The *AsQueryable* method is used to convert the fixed collection of objects to an `IQueryable<Product>`, which is required to implement the *IProductRepository* interface and allows to create a compatible fake repository without having to deal with real queries. 
+* The *AsQueryable* method is used to convert the fixed collection of objects to an `IQueryable<Product>`, which is required to implement the *IProductRepository* interface and allows to create a compatible fake repository without having to deal with real queries.
 
 
 
@@ -65,7 +65,7 @@ It implements the *IProductRepository* interface by returning a fixed collection
 * MVC creates a new *FakeRepository* object and uses it to invoke the *ProductController* constructor in order to create the controller object that will process the HTTP request.
 * This is known as **dependency injection**, and its approach allows the *ProductController* constructor to access the application’s repository through the *IProductRepository* interface without having any need to know which implementation class has been configured. Later, the fake repository will be replaced with the real
 one, and the controller will continue to work without changes.
-* Add an action method, called *List*, which will render a view showing the complete list of the products in the repository. 
+* Add an action method, called *List*, which will render a view showing the complete list of the products in the repository.
 * Calling the *View* method without specifying a view name, tells MVC to render the default view for the action method.
 * Passing the collection of *Product* objects from the repository to the *View* method
 provides the framework with the data with which to populate the Model object in a strongly typed view.
@@ -76,10 +76,10 @@ provides the framework with the data with which to populate the Model object in 
 
 * Create a shared layout that will define common content that will be included in all HTML responses sent to clients. Created the *Views/Shared* folder and add `_Layout.cshtml`.
 * Configure the application so that the `_Layout.cshtml` file is applied by default. Add an MVC View Start Page file called `_ViewStart.cshtml` to the Views folder.
-* Add the view that will be displayed when the *List* action method is used to handle a request. Create the *Views/Product* folder and add to it a Razor view file called * List.cshtml*. 
+* Add the view that will be displayed when the *List* action method is used to handle a request. Create the *Views/Product* folder and add to it a Razor view file called * List.cshtml*.
 * The *@model* expression at the top of the file specifies that the view will receive a sequence of *Product* objects from the action method as its model data. A *@foreach* expression  works through the sequence and generates a simple set of HTML elements for each *Product* object that is received.
 * The *Price* property is converted to a string using the `ToString("c"`) method, which renders numerical values as currency according to the culture settings that are in effect on the server.
-* The view deals only with how details of each *Product* is displayed using HTML elements, which is consistent with the **separation of concerns**. 
+* The view deals only with how details of each *Product* is displayed using HTML elements, which is consistent with the **separation of concerns**.
 
 
 
@@ -91,3 +91,12 @@ mysite/)* to the *List* action method in the *ProductController* class. Edit the
 * The *Configure* method of the *Startup* class is used to set up the request pipeline, which consists of classes (known as middleware) that will inspect HTTP requests and generate responses. The *UseMvc* method sets up the MVC middleware, and one of the configuration options is the scheme that will be used to map URLs to controllers and action methods.
 * The default route is set so that MVC sends requests to the *List* action method of the *Product* controller unless the request URL specifies otherwise.
 * Now the app presents the fake data when run.
+
+
+&nbsp;
+### 09 Create the database context class
+
+* Install the Nuget package *Microsoft.EntityFrameworkCore.Tools.DotNet*.
+* The database context class is the bridge between the application and Entity Framework Core and provides access to the application’s data using model objects. Add *ApplicationDbContext.cs* to the Models folder.
+* The *DbContext* base class provides access to the Entity Framework Core’s underlying functionality, and the *Products* property will provide access to the *Product* objects in the database. The *ApplicationDbContext* class is derived from *DbContext* and adds the properties that will be used to read and
+write the application’s data. There is only one property at the moment, which will provide access to *Product* objects.
