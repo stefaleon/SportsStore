@@ -135,3 +135,13 @@ controller at the moment, will receive an *EFProductRepository* object when they
 ### 13 Disable Scope Verification
 
 * The *Program* class is responsible for starting and configuring ASP.NET Core before handing control to the *Startup* class. Apply a configuration change to the dependency injection feature, so that an exception thrown with the creation of the database schema is avoided.
+
+
+
+&nbsp;
+### 14 Create the Database Migration
+
+* Entity Framework Core is able to generate the schema for the database using the model classes through a feature called migrations. When you prepare a migration, EF Core creates a C# class that contains the SQL commands required to prepare the database. If you need to modify your model classes, then you can create a new migration that contains the SQL commands required to reflect the changes. In this way, you don’t have to worry about manually writing and testing SQL commands and can just focus on the C# model classes in the application.
+* Add a *DotNetCliToolReference* to *Microsoft.EntityFrameworkCore.Tools.DotNet* in *SportStore.csproj* and build the project.
+* Navigate to the SportsStore project folder and run `$ dotnet ef migrations add Initial`.
+* A *Migrations* folder is created. The *Product* model class has been used to create the schema.
