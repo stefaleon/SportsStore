@@ -100,3 +100,10 @@ mysite/)* to the *List* action method in the *ProductController* class. Edit the
 * The database context class is the bridge between the application and Entity Framework Core and provides access to the application’s data using model objects. Add *ApplicationDbContext.cs* to the Models folder.
 * The *DbContext* base class provides access to the Entity Framework Core’s underlying functionality, and the *Products* property will provide access to the *Product* objects in the database. The *ApplicationDbContext* class is derived from *DbContext* and adds the properties that will be used to read and
 write the application’s data. There is only one property at the moment, which will provide access to *Product* objects.
+
+
+&nbsp;
+### 10 Create the Repository Class
+
+* Add *EFProductRepository.cs* to the Models folder.
+* The repository implementation just maps the *Products* property defined by the *IProductRepository* interface onto the *Products* property defined by the *ApplicationDbContext* class. The *Products* property in the context class returns a `DbSet<Product>` object, which implements the `IQueryable<T>` interface and makes it easy to implement the *IProductRepository* interface when using Entity Framework Core. This ensures that queries to the database will retrieve only the objects that are required.
