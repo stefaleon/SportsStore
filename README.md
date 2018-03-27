@@ -107,3 +107,11 @@ write the application’s data. There is only one property at the moment, which 
 
 * Add *EFProductRepository.cs* to the Models folder.
 * The repository implementation just maps the *Products* property defined by the *IProductRepository* interface onto the *Products* property defined by the *ApplicationDbContext* class. The *Products* property in the context class returns a `DbSet<Product>` object, which implements the `IQueryable<T>` interface and makes it easy to implement the *IProductRepository* interface when using Entity Framework Core. This ensures that queries to the database will retrieve only the objects that are required.
+
+
+&nbsp;
+### 11 Define the Connection String
+
+* A connection string specifies the location and name of the database and provides configuration settings for how the application should connect to the database server. Connection strings are stored in a JSON file called *appsettings.json*.
+* Add New Item -> App Settings file -> create and edit *appsettings.json*.
+* Within the *Data* section of the configuration file, set the name of the connection string to *SportsStoreProducts*. The value of the *ConnectionString* item specifies that the LocalDB feature should be used for a database called *SportsStore*.
