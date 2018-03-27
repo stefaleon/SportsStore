@@ -145,3 +145,18 @@ controller at the moment, will receive an *EFProductRepository* object when they
 * Add a *DotNetCliToolReference* to *Microsoft.EntityFrameworkCore.Tools.DotNet* in *SportStore.csproj* and build the project.
 * Navigate to the SportsStore project folder and run `$ dotnet ef migrations add Initial`.
 * A *Migrations* folder is created. The *Product* model class has been used to create the schema.
+
+
+
+&nbsp;
+### 15 Create the Seed Data
+
+* To populate the database and provide some sample data, added and edit *SeedData.cs*.
+* The static *EnsurePopulated* method receives an *IApplicationBuilder* argument, which is the interface used in the *Configure* method of the *Startup* class to register middleware components to handle HTTP requests, and ensures that the database has content. It obtains an *ApplicationDbContext* object through the *IApplicationBuilder* interface and calls the *Database.Migrate* method to ensure that the migration has been applied, which means that the database will be created and prepared so that it can store *Product* objects.
+* Next, the number of Product objects in the database is checked. If there are no objects in the database, then the database is populated using a collection of *Product* objects using the *AddRange* method and then written to the database using the *SaveChanges* method.
+* The final change is to seed the database when the application starts, by adding a call to the *EnsurePopulated* method from the Startup class.
+
+### Display seed data
+* Start the application, and the database will be created and seeded and used to provide the application with its data.
+* When the browser requests the default URL for the application, the application configuration tells MVC that it needs to create a *Product* controller to handle the request. Creating a new *Product* controller means invoking the *ProductController* constructor, which requires an object that implements the
+*IProductRepository* interface, and the new configuration tells MVC that an *EFProductRepository* object should be created and used for this. The *EFProductRepository *object taps into the Entity Framework Core functionality that loads data from SQL Server and converts it into *Product* objects. All of this is hidden from the *ProductController* class, which just receives an object that implements the *IProductRepository* interface and works with the data it provides. The result is that the browser window shows the sample data in the database.
