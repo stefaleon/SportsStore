@@ -129,3 +129,9 @@ write the application’s data. There is only one property at the moment, which 
 method and specifies the connection string, which is obtained from the *Configuration* property.
 * Replace the fake repository with the real one. The components in the application that use the *IProductRepository* interface, which is just the *Product*
 controller at the moment, will receive an *EFProductRepository* object when they are created, which will provide them with access to the data in the database. The fake data will be seamlessly replaced by the real data in the database without having to change the *ProductController* class.
+
+
+&nbsp;
+### 13 Disable Scope Verification
+
+* The *Program* class is responsible for starting and configuring ASP.NET Core before handing control to the *Startup* class. Apply a configuration change to the dependency injection feature, so that an exception thrown with the creation of the database schema is avoided.
