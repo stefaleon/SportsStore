@@ -115,3 +115,17 @@ write the application’s data. There is only one property at the moment, which 
 * A connection string specifies the location and name of the database and provides configuration settings for how the application should connect to the database server. Connection strings are stored in a JSON file called *appsettings.json*.
 * Add New Item -> App Settings file -> create and edit *appsettings.json*.
 * Within the *Data* section of the configuration file, set the name of the connection string to *SportsStoreProducts*. The value of the *ConnectionString* item specifies that the LocalDB feature should be used for a database called *SportsStore*.
+
+
+&nbsp;
+### 12 Configure the database Connection
+
+* Read the connection string and configure the application to use it to connect to the database.
+* Apply changes to the *Startup* class required to receive details of the configuration data contained in the *appsettings.json* file and use it to configure Entity Framework Core.
+* Add a constructor to the *Startup* class. The constructor receives the configuration data loaded from the *appsettings.json* file, which is presented through an object that implements the *IConfiguration* interface.
+* The constructor assigns the *IConfiguration* object to a property called *Configuration* so that it can be used by the rest of the *Startup* class.
+* The *AddDbContext* extension method sets up the services provided by Entity Framework Core for the database context class.
+* Many of the methods that are used in the *Startup* class allow services and middleware features to be configured using options arguments. The argument to the *AddDbContext* method is a lambda expression that receives an options object that configures the database for the context class with the *UseSqlServer*
+method and specifies the connection string, which is obtained from the *Configuration* property.
+* Replace the fake repository with the real one. The components in the application that use the *IProductRepository* interface, which is just the *Product*
+controller at the moment, will receive an *EFProductRepository* object when they are created, which will provide them with access to the data in the database. The fake data will be seamlessly replaced by the real data in the database without having to change the *ProductController* class.
