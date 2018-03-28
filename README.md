@@ -196,3 +196,17 @@ method displays the first page of products when MVC invokes it without an argume
 * The complexity in this test is in creating the objects that are required to create and use a tag helper. Tag helpers use *IUrlHelperFactory* objects to generate Urls that target different parts of the application. *Moq* is used to create an implementation of this interface and the related *IUrlHelper* interface that provides test data.
 * The core part of the test verifies the tag helper output by using a literal string value that contains double quotes. C# is perfectly capable of working with such strings, as long as the string is prefixed with `@` and uses two sets of double quotes ( "" ) in place of one set of double quotes. Remember not
 to break the literal string into separate lines unless the string you are comparing to is similarly broken.
+
+
+
+&nbsp;
+### 20 Add the View Model Data
+
+* Provide an instance of the *PagingInfo* view model class to the view.
+* Add *ProductsListViewModel.cs* to the *Models/ViewModels* folder.
+* Update the *List* action method in the *ProductController* class to use the *ProductsListViewModel* class in order to provide the view with details of the products to display on the page and details of the pagination.
+
+### Unit test the View Model Data
+
+* Add the *Can_Send_Pagination_View_Model* unit test to *ProductControllerTests*.
+* Modify the earlier pagination unit test, contained in the *Can_Paginate* method, so that it makes use of *ProductsListViewModel*.
