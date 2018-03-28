@@ -218,3 +218,13 @@ to break the literal string into separate lines unless the string you are compar
 
 * Now a *ProductsListViewModel* object is passed as the model data to the view. Update the *List.cshtml* file.
 * Add an HTML element that the tag helper will process to create the page links.
+
+
+
+
+&nbsp;
+### 20 Improve the URLs
+
+* Create URLs that are more appealing by creating a scheme that follows the pattern of composable URLs. URLs like `http://localhost/Products/Page2` make more sense to the user than `http://localhost/?productPage=2`. 
+* Uses the ASP.NET Core routing feature, which is responsible for processing URLs to figure out what part of the application they target. Add a new route when registering the MVC middleware in the *Configure* method of the *Startup* class.
+* It is important that the new route is added before the *Default* one that is already in the method, in order to take precedence over the existing one. The routing system processes routes in the order they are listed.
