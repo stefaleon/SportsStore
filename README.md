@@ -178,3 +178,12 @@ method displays the first page of products when MVC invokes it without an argume
 
 * Unit test the pagination feature by creating a mock repository, injecting it into the constructor of the *ProductController* class, and then calling the *List* method to request a specific page. Compare the resulting *Product* objects with what I would be expected from the test data in the mock implementation.
 * The result is a *ViewResult* object, and the value of its *ViewData.Model* property has to be casted to the expected data type.
+
+
+&nbsp;
+### 18 Tag helper
+
+* Create a tag helper in order to render some page links at the bottom of each list of products, so that customers can navigate between pages.
+* Create the *Models/ViewModels* folder and add *PagingInfo.cs*.
+* Create the *Infrastructure* folder and add *PageLinkTagHelper.cs*. The tag helper populates a div element with elements that correspond to pages of products.
+* Most MVC components, such as controllers and views, are discovered automatically, but tag helpers have to be registered. Add a statement to *_ViewImports.cshtml* that tells MVC to look for tag helper classes in the *SportsStore.Infrastructure* namespace. Also add a `@using` expression so tha the view model classes can be referred in views without having to qualify their names with the namespace.
