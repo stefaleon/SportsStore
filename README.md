@@ -170,3 +170,11 @@ controller at the moment, will receive an *EFProductRepository* object when they
 * The *PageSize* field specifies that four products will be displayed per page. With the optional parameter *productPage* in the *List* method, the action
 method displays the first page of products when MVC invokes it without an argument.
 * The body of the action method gets the Product objects, orders them by the primary key, skips over the products that occur before the start of the current page, and takes the number of products specified by the *PageSize* field.
+
+
+
+&nbsp;
+### 17 Unit test Pagination
+
+* Unit test the pagination feature by creating a mock repository, injecting it into the constructor of the *ProductController* class, and then calling the *List* method to request a specific page. Compare the resulting *Product* objects with what I would be expected from the test data in the mock implementation.
+* The result is a *ViewResult* object, and the value of its *ViewData.Model* property has to be casted to the expected data type.
