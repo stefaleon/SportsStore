@@ -210,3 +210,11 @@ to break the literal string into separate lines unless the string you are compar
 
 * Add the *Can_Send_Pagination_View_Model* unit test to *ProductControllerTests*.
 * Modify the earlier pagination unit test, contained in the *Can_Paginate* method, so that it makes use of *ProductsListViewModel*.
+
+
+
+&nbsp;
+### 20 Update the view
+
+* Now a *ProductsListViewModel* object is passed as the model data to the view. Update the *List.cshtml* file.
+* Add an HTML element that the tag helper will process to create the page links.
