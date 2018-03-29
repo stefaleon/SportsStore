@@ -300,3 +300,11 @@ the same dependency injection feature used in the controller, and it has the sam
 
 * Create *NavigationMenuViewComponentTests.cs*.
 * Create a list that is sorted in alphabetical order and contains no duplicates. Supply some test data that does have duplicate categories and that is not in order, pass this to the tag helper class, and assert that the data has been properly cleaned up.
+
+
+
+&nbsp;
+### 29 Create the View for the NavigationMenuViewComponent
+
+* Razor uses different conventions for dealing with views that are selected by view components. Both the default name of the view and the locations that are searched for the view are different from those used for controllers.
+* Create the *Views/Shared/Components/NavigationMenu* folder and add to it a view file called *Default.cshtml*.
