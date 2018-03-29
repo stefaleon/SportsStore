@@ -320,3 +320,12 @@ the same dependency injection feature used in the controller, and it has the sam
 * In *NavigationMenuViewComponent.cs*, inside the *Invoke* method, dynamically assign a *SelectedCategory* property to the ViewBag object and set its value to be the current category, which is obtained through the context object returned by the *RouteData* property.
 * Test that the view component correctly adds details of the selected category by reading the value of the ViewBag property in a unit test added to *NavigatioMenuViewComponentTests*.
 * Update the *Default.cshtml* view which is selected by the view component and vary the CSS classes used to style the links to make the one representing the current category distinct from the others. Use a Razor expression within the class attribute to apply the *btn-primary* class to the element that represents the selected category and the *btn-secondary* class otherwise.
+
+
+
+&nbsp;
+### 31 Correct the Page Count
+
+* Currently, the number of page links is determined by the total number of products in the repository and not the number of products in the selected category. This means that the customer can click the link for page 2 of the *Chess* category and end up with an empty page because there are not enough chess products to fill two pages.
+* Update the *List* action method in the *Product* controller so that the pagination information takes the categories into account.
+* Add a unit test method to the *ProductControllerTests* class to test the ability to generate the current product count for different categories. Create a mock repository that contains known data in a range of categories and then call the *List* action method requesting each category in turn.
