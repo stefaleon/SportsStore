@@ -284,3 +284,13 @@ to break the literal string into separate lines unless the string you are compar
 * Create the *Components* folder and add *NavigationMenuViewComponent.cs*.
 * The view component’s *Invoke* method is called when the component is used in a Razor view, and the result of the *Invoke* method is inserted into the HTML sent to the browser.
 * Use the component in `_Layout.cshtml` with a call to the `Component.InvokeAsync` method.
+
+
+&nbsp;
+### 27 Generate Category Lists
+
+* The view component can be used to generate the list of components and then the more expressive Razor syntax can be used to render the HTML that will display them.
+* Update the view component.
+* The constructor defines an *IProductRepository* argument. When MVC needs to create an instance of the view component class, it will note the need to provide this argument and inspect the configuration in the *Startup* class to determine which implementation object should be used. This is
+the same dependency injection feature used in the controller, and it has the same effect, which is to allow the view component to access data without knowing which repository implementation will be used.
+* In the *Invoke method*, *LINQ* is used to select and order the set of categories in the repository and pass them as the argument to the *View* method, which renders the default Razor partial view, details of which are returned from the method using an *IViewComponentResult* object.
