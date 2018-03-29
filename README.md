@@ -269,9 +269,18 @@ to break the literal string into separate lines unless the string you are compar
   * `/Soccer/Page2` Shows the specified page (in this case, page 2) of items from the specified category (in this case, Soccer)
 
 ### Preserve Filtering
-  
+
 * The ASP.NET Core routing system is used by MVC to handle incoming requests from clients, but it also generates outgoing URLs that conform to the URL scheme and that can be embedded in web pages.  
 * The *IUrlHelper* interface provides access to the URL-generating functionality.
 * In *PageLinkTagHelper.cs*, add the *PageUrlValues* tag helper property and decorate it with the *HtmlAttributeName* attribute. Specify a prefix for attribute names on the element, which in this case will be *page-url-*. The value of any attribute whose name begins with this prefix will be added to the dictionary that is assigned to the *PageUrlValues* property, which is then passed to the *IUrlHelper.Action* method to generate the URL for the href attribute of the `a` elements that the tag helper produces.
 * In *List.cshtml*, add a new attribute to the div element that is processed by the tag helper, specifying the category that will be used to generate the URL.
 * By adding the current category, taken from the view model, URLs that contain the category are generated. When the user clicks this kind of link, the current category will be passed to the *List* action method, and the filtering will be preserved.
+
+
+&nbsp;
+### 26 Create the Navigation View Component
+
+* ASP.NET Core MVC has the concept of **view components**, which are perfect for creating items such as a reusable navigation control. A view component is a C# class that provides a small amount of reusable application logic with the ability to select and display Razor partial views.
+* Create the *Components* folder and add *NavigationMenuViewComponent.cs*.
+* The view component’s *Invoke* method is called when the component is used in a Razor view, and the result of the *Invoke* method is inserted into the HTML sent to the browser.
+* Use the component in `_Layout.cshtml` with a call to the `Component.InvokeAsync` method.
