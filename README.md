@@ -294,3 +294,9 @@ to break the literal string into separate lines unless the string you are compar
 * The constructor defines an *IProductRepository* argument. When MVC needs to create an instance of the view component class, it will note the need to provide this argument and inspect the configuration in the *Startup* class to determine which implementation object should be used. This is
 the same dependency injection feature used in the controller, and it has the same effect, which is to allow the view component to access data without knowing which repository implementation will be used.
 * In the *Invoke method*, *LINQ* is used to select and order the set of categories in the repository and pass them as the argument to the *View* method, which renders the default Razor partial view, details of which are returned from the method using an *IViewComponentResult* object.
+
+&nbsp;
+### 28 Unit test Generating the Category List
+
+* Create *NavigationMenuViewComponentTests.cs*.
+* Create a list that is sorted in alphabetical order and contains no duplicates. Supply some test data that does have duplicate categories and that is not in order, pass this to the tag helper class, and assert that the data has been properly cleaned up.
