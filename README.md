@@ -256,3 +256,22 @@ to break the literal string into separate lines unless the string you are compar
 * Add the *Can_Filter_Products* method to the *ProductControllerTests* class.
 * Create a mock repository containing *Product* objects that belong to a range of categories. One specific category is requested using the action method, and the results are checked to ensure that the results are the right objects in the right order.
 
+
+
+&nbsp;
+### 25 Refine the URL Scheme
+
+* Edit the *Configure* method of the *Startup* class. Apply new routes in the proper order.
+* The URL scheme that these routes represent is:
+  * `/` Lists the first page of products from all categories
+  * `/Page2` Lists the specified page (in this case, page 2), showing items from all categories
+  * `/Soccer` Shows the first page of items from a specific category (in this case, the Soccer category)
+  * `/Soccer/Page2` Shows the specified page (in this case, page 2) of items from the specified category (in this case, Soccer)
+
+### Preserve Filtering
+  
+* The ASP.NET Core routing system is used by MVC to handle incoming requests from clients, but it also generates outgoing URLs that conform to the URL scheme and that can be embedded in web pages.  
+* The *IUrlHelper* interface provides access to the URL-generating functionality.
+* In *PageLinkTagHelper.cs*, add the *PageUrlValues* tag helper property and decorate it with the *HtmlAttributeName* attribute. Specify a prefix for attribute names on the element, which in this case will be *page-url-*. The value of any attribute whose name begins with this prefix will be added to the dictionary that is assigned to the *PageUrlValues* property, which is then passed to the *IUrlHelper.Action* method to generate the URL for the href attribute of the `a` elements that the tag helper produces.
+* In *List.cshtml*, add a new attribute to the div element that is processed by the tag helper, specifying the category that will be used to generate the URL.
+* By adding the current category, taken from the view model, URLs that contain the category are generated. When the user clicks this kind of link, the current category will be passed to the *List* action method, and the filtering will be preserved.
