@@ -308,3 +308,15 @@ the same dependency injection feature used in the controller, and it has the sam
 
 * Razor uses different conventions for dealing with views that are selected by view components. Both the default name of the view and the locations that are searched for the view are different from those used for controllers.
 * Create the *Views/Shared/Components/NavigationMenu* folder and add to it a view file called *Default.cshtml*.
+
+
+
+&nbsp;
+### 30 Highlight the Current Category
+
+* ASP.NET Core MVC components such as controllers and view components can receive information about the current request by asking for a context object. Most of the time, you can rely on the **base** classes that you use to create components to take care of getting the context object for you, such as when you use the *Controller* base class to create controllers.
+* The *ViewComponent* base class is no exception and provides access to context objects through a set of properties. One of the properties is called *RouteData*, which provides information about how the request URL was handled by the routing system.
+* Use the *RouteData* property to access the request data in order to get the value for the currently selected category. Passing the category to the view could be done by creating another view model class, but for variety, use the **ViewBag** feature.
+* In *NavigationMenuViewComponent.cs*, inside the *Invoke* method, dynamically assign a *SelectedCategory* property to the ViewBag object and set its value to be the current category, which is obtained through the context object returned by the *RouteData* property.
+* Test that the view component correctly adds details of the selected category by reading the value of the ViewBag property in a unit test added to *NavigatioMenuViewComponentTests*.
+* Update the *Default.cshtml* view which is selected by the view component and vary the CSS classes used to style the links to make the one representing the current category distinct from the others. Use a Razor expression within the class attribute to apply the *btn-primary* class to the element that represents the selected category and the *btn-secondary* class otherwise.
