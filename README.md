@@ -235,3 +235,15 @@ to break the literal string into separate lines unless the string you are compar
 
 * Style the main layout and the links with Bootstrap 4 classes.
 * Add the partial view *ProductSummary.cshtml* in the *Views/Shared* folder and use it in *List.cshtml*.
+
+
+
+&nbsp;
+### 23 Filter the Product List by Category
+
+* Add the *CurrentCategory* property in *ProductsListViewModel .cs*.
+* Update the *Product* controller so that the *List* action method will filter *Product* objects by category.
+* Add a parameter called *category*. If *category* is not null, only those *Product* objects with a matching *Category* property are selected.
+* Set the value of the *CurrentCategory* property to *category*.
+* Currently the value of *PagingInfo.TotalItems* is incorrectly calculated because it doesn’t take the category filter into account.
+* Update the existing unit tests in order to reflect the change in the signature of the *List* action method. Pass null as the first parameter to the *List* method in those unit tests that work with the controller.
