@@ -247,3 +247,12 @@ to break the literal string into separate lines unless the string you are compar
 * Set the value of the *CurrentCategory* property to *category*.
 * Currently the value of *PagingInfo.TotalItems* is incorrectly calculated because it doesn’t take the category filter into account.
 * Update the existing unit tests in order to reflect the change in the signature of the *List* action method. Pass null as the first parameter to the *List* method in those unit tests that work with the controller.
+
+
+
+&nbsp;
+### 24 Unit Test Category Filtering
+
+* Add the *Can_Filter_Products* method to the *ProductControllerTests* class.
+* Create a mock repository containing *Product* objects that belong to a range of categories. One specific category is requested using the action method, and the results are checked to ensure that the results are the right objects in the right order.
+
