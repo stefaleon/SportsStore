@@ -354,3 +354,15 @@ the same dependency injection feature used in the controller, and it has the sam
 * Users can change their mind and remove products from the cart. Test with *Can_Remove_Line*.
 * Calculate the total cost of the items in the cart. Test with *Calculate_Cart_Total*.
 * Ensure that the contents of the cart are properly removed when reset. Test with *Can_Clear_Contents*.
+
+
+&nbsp;
+### 34 Add the Add to Cart Buttons
+
+* Add a class file called *UrlExtensions.cs* to the *Infrastructure* folder and define the *PathAndQuery* extension method.
+* The *PathAndQuery* extension method operates on the *HttpRequest* class and generates the URL that the browser will be returned to after the cart has been updated, taking into account the query string if there is one.
+* Add the namespace that contains the extension method to the view imports file (`_ViewImports.cshtml`) so that *PathAndQuery* can be used in the partial view.
+* Add a form element that contains two hidden input elements. They specify the *ProductID* value from the view model and the URL that the browser should be returned to after the cart has been updated.
+* The form element and one of the input elements are configured using built-in tag helpers, which are a useful way of generating forms that contain model values and that target controllers and actions in the application.
+* The other input element uses the *PathAndQuery* extension method to set the return URL.
+* Add a button element that will submit the form to the application.
