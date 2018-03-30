@@ -343,3 +343,14 @@ the same dependency injection feature used in the controller, and it has the sam
 * The *Cart* class uses the *CartLine* class, defined in the same file, to represent a product selected by the customer and the quantity the user wants to buy.
 * There are methods to add an item to the cart (*AddItem*), remove a previously added item from the cart (*RemoveLine*), calculate the total cost of the items in the cart (*ComputeTotalValue*), and reset the cart by removing all the items (*Clear*).
 * There is also the *Lines* property that gives access to the contents of the cart using an `IEnumerable<CartLine>`.
+
+
+&nbsp;
+### 33 Unit test the Cart Model
+
+* Create *CartTests.cs* in *SportsStore.Tests*.
+* The first time that a given product is added to the cart, a new *CartLine* must be added. Test with *Can_Add_New_Lines*.
+* If a product is already added to the cart, the quantity of the corresponding *CartLine* must be incremented instead of creating a new *CartLine*. Test with *Can_Add_Quantity_For_Existing_Lines*.
+* Users can change their mind and remove products from the cart. Test with *Can_Remove_Line*.
+* Calculate the total cost of the items in the cart. Test with *Calculate_Cart_Total*.
+* Ensure that the contents of the cart are properly removed when reset. Test with *Can_Clear_Contents*.
