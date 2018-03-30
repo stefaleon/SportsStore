@@ -377,3 +377,12 @@ the same dependency injection feature used in the controller, and it has the sam
 * The *AddMemoryCache* method call sets up the in-memory data store.
 * The *AddSession* method registers the services used to access session data.
 * The *UseSession* method allows the session system to automatically associate requests with sessions when they arrive from the client.
+
+
+&nbsp;
+### 36 Implement the Cart Controller
+
+* Add *CartController.cs* to the *Controllers* folder.
+* The ASP.NET session state feature is used to store and retrieve *Cart* objects, which is the purpose of the *GetCart* method. The registered middleware uses cookies or URL rewriting to associate multiple requests from a user together to form a single browsing session. A related feature is session state, which associates data with a session. This is an ideal fit for the *Cart* class: each user have their own cart, and the cart is persistent between requests.
+* Data associated with a session is deleted when a session expires (typically because a user has not made a request for a while), which means that there is no need to manage the storage or life cycle of the *Cart* objects.
+* For the *AddToCart* and *RemoveFromCart* action methods, the parameter names match the input elements in the HTML forms created in the *ProductSummary.cshtml* view. This allows MVC to associate incoming form POST variables with those parameters. This is known as **model binding** and is a powerful tool for simplifying controller classes.
