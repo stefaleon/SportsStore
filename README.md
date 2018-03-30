@@ -366,3 +366,14 @@ the same dependency injection feature used in the controller, and it has the sam
 * The form element and one of the input elements are configured using built-in tag helpers, which are a useful way of generating forms that contain model values and that target controllers and actions in the application.
 * The other input element uses the *PathAndQuery* extension method to set the return URL.
 * Add a button element that will submit the form to the application.
+
+
+
+&nbsp;
+### 35 Enable Sessions
+
+* Details of a user’s cart will be stored using session state, which is data that is stored at the server and associated with a series of requests made by a user. ASP.NET provides a range of different ways to store session state, including storing it in memory, which is the approach used here. The session data is lost when the application is stopped or restarted.
+* Enable sessions by adding the *AddMemoryCache* and *AddSession* services and the *UseSession* middleware in the *Startup* class.
+* The *AddMemoryCache* method call sets up the in-memory data store.
+* The *AddSession* method registers the services used to access session data.
+* The *UseSession* method allows the session system to automatically associate requests with sessions when they arrive from the client.
