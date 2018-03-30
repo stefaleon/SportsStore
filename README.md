@@ -395,3 +395,13 @@ the same dependency injection feature used in the controller, and it has the sam
 * Add *SessionExtensions.cs* to the *Infrastructure* folder and define the *SetJson* and *GetJson* extension methods.
 * The extension methods make it easy to store and retrieve *Cart* objects. Use `HttpContext.Session.SetJson("Cart", cart);` in the controller to add a Cart to the session state. The *HttpContext* property is provided by the Controller base class and returns an *HttpContext* object that provides context data about the request that has been received and the response that is being prepared. The *HttpContext.Session* property returns an object that implements the *ISession* interface, which is the type on which the *SetJson* method is defined, which accepts arguments that specify a key and an object that will be added to the session state. The extension method serializes the object and adds it to the session state using the underlying functionality provided by the *ISession* interface.
 * To retrieve the Cart again, use the *GetJson* extension method, specifying the same key: `Cart cart = HttpContext.Session.GetJson<Cart>("Cart");`. The type parameter specifies the expected type, which is used in the deserialization process.
+
+
+&nbsp;
+### 38 Display the Contents of the Cart
+
+* Both the *AddToCart* and *RemoveFromCart* methods call the *RedirectToAction* method. This has the effect of sending an HTTP redirect instruction to the client
+browser, asking the browser to request a new URL. In this case, the browser requests a URL that will call the *Index* action method of the *CartController*.
+* Two pieces of information must be passed to the view that will display the contents of the cart: the *Cart* object and the URL to display if the user clicks the *Continue Shopping* button. Create a new class file called *CartIndexViewModel.cs* in the Models/ViewModels folder of the SportsStore project and used it to define the *CartIndexViewModel* class.
+* Implement the *Index* action method in the *CartCcontroller* class. The *Index* action retrieves the *Cart* object from the session state and uses it to create a *CartIndexView* Model object, which is then passed to the *View* method to be used as the view model.
+* Create the *Views/Cart* folder and add to it a Razor view file called *Index.cshtml*. The view enumerates the lines in the cart and adds rows for each of them to an HTML table, along with the total cost per line and the total cost for the cart.
