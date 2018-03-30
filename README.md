@@ -329,3 +329,17 @@ the same dependency injection feature used in the controller, and it has the sam
 * Currently, the number of page links is determined by the total number of products in the repository and not the number of products in the selected category. This means that the customer can click the link for page 2 of the *Chess* category and end up with an empty page because there are not enough chess products to fill two pages.
 * Update the *List* action method in the *Product* controller so that the pagination information takes the categories into account.
 * Add a unit test method to the *ProductControllerTests* class to test the ability to generate the current product count for different categories. Create a mock repository that contains known data in a range of categories and then call the *List* action method requesting each category in turn.
+
+
+
+&nbsp;
+### Building the Shopping Cart
+
+
+&nbsp;
+### 32 Define the Cart Model
+
+* Add a class file called *Cart.cs* to the *Models* folder.
+* The *Cart* class uses the *CartLine* class, defined in the same file, to represent a product selected by the customer and the quantity the user wants to buy.
+* There are methods to add an item to the cart (*AddItem*), remove a previously added item from the cart (*RemoveLine*), calculate the total cost of the items in the cart (*ComputeTotalValue*), and reset the cart by removing all the items (*Clear*).
+* There is also the *Lines* property that gives access to the contents of the cart using an `IEnumerable<CartLine>`.
