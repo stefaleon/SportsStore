@@ -403,5 +403,21 @@ the same dependency injection feature used in the controller, and it has the sam
 * Both the *AddToCart* and *RemoveFromCart* methods call the *RedirectToAction* method. This has the effect of sending an HTTP redirect instruction to the client
 browser, asking the browser to request a new URL. In this case, the browser requests a URL that will call the *Index* action method of the *CartController*.
 * Two pieces of information must be passed to the view that will display the contents of the cart: the *Cart* object and the URL to display if the user clicks the *Continue Shopping* button. Create a new class file called *CartIndexViewModel.cs* in the Models/ViewModels folder of the SportsStore project and used it to define the *CartIndexViewModel* class.
-* Implement the *Index* action method in the *CartCcontroller* class. The *Index* action retrieves the *Cart* object from the session state and uses it to create a *CartIndexView* Model object, which is then passed to the *View* method to be used as the view model.
+* Implement the *Index* action method in the *CartController* class. The *Index* action retrieves the *Cart* object from the session state and uses it to create a *CartIndexView* Model object, which is then passed to the *View* method to be used as the view model.
 * Create the *Views/Cart* folder and add to it a Razor view file called *Index.cshtml*. The view enumerates the lines in the cart and adds rows for each of them to an HTML table, along with the total cost per line and the total cost for the cart.
+
+
+
+
+&nbsp;
+### Refine the Cart Model with a Service
+
+
+
+&nbsp;
+### 39 Create a Storage-Aware Cart Class
+
+* Add *SessionCart.cs* to the *Models* folder.
+* The *SessionCart* class subclasses the *Cart* class and overrides the *AddItem*, *RemoveLine*, and *Clear* methods so they call the base implementations and then store the updated state in the session using the extension methods on the *ISession* interface.
+* The static *GetCart* method is a factory for creating *SessionCart* objects and providing them with an *ISession* object so they can store themselves. The obtained instance of the *IHttpContextAccessor* service provides access to an *HttpContext* object that, in turn,
+provides the *ISession*. This indirect approach is required because the session isn’t provided as a regular service.
