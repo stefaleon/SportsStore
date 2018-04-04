@@ -466,3 +466,10 @@ provides the *ISession*. This indirect approach is required because the session 
 * Add *CartSummaryViewComponent.cs* in the *Components folder* and use it to define the view component. This view component is able to take advantage of the *Cart service* in order to receive a *Cart* object as a constructor argument. The result is a simple view component class that passes on the *Cart* object to the *View* method in order to generate the fragment of HTML that will be included in the layout.
 * Create the *Views/Shared/Components/CartSummary* folder and add *Default.cshtml*. The view displays a button with the Font Awesome cart icon and, if there are items in the cart, provides a snapshot that details the number of items and their total value.
 * Modify the shared layout in `_Layout.cshtml` so that the cart summary is included.
+
+
+&nbsp;
+### 44 Add CSS and JS dependencies locally
+
+* Add the *lib* folder inside the *wwwroot* folder and inside it add the *css* and *js* folders.
+* Add local copies of *bootstrap.min.css* and *fontawesome.js* and link to these instead of linking to the CDN links in `_Layout.cshtml`.
