@@ -412,6 +412,9 @@ browser, asking the browser to request a new URL. In this case, the browser requ
 &nbsp;
 ### Refine the Cart Model with a Service
 
+* Use the **services** feature that sits at the heart of ASP.NET Core to simplify the way that *Cart* objects are managed, freeing individual components such as the *CartController* from needing to deal with the details directly.
+
+
 
 
 &nbsp;
@@ -431,3 +434,10 @@ provides the *ISession*. This indirect approach is required because the session 
 * The *AddScoped* method specifies that the same object should be used to satisfy related requests for *Cart* instances. How requests are related can be configured, but by default, it means that any *Cart* required by components handling the same HTTP request will receive the same object. Rather than provide the *AddScoped* method with a type mapping, a lambda expression is invoked to satisfy *Cart* requests. The expression receives the collection of services that have been registered and passes the collection to the *GetCart* method of the
 *SessionCart* class. The result is that requests for the *Cart* service will be handled by creating *SessionCart* objects, which will serialize themselves as session data when they are modified.
 * The *AddSingleton* method specifies that the same object should always be used. The service tells MVC to use the *HttpContextAccessor* class when implementations of the *IHttpContextAccessor* interface are required. This service is required so that the current session in the *SessionCart* class can be accessed.
+
+
+&nbsp;
+### 41 Simplify the Cart Controller
+
+ * Rework the *CartController* class to take advantage of the new service.
+ * The *CartController* class indicates that it needs a *Cart* object by declaring a constructor argument, which has allowed the removal of the methods that read and write data from the session and the steps required to write updates. The result is a controller that is simpler and remains focused on its role in the application without having to worry about how *Cart* objects are created or persisted. And, since services are available throughout the application, any component can get hold of the user’s cart using the same technique.
