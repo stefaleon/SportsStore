@@ -441,3 +441,19 @@ provides the *ISession*. This indirect approach is required because the session 
 
  * Rework the *CartController* class to take advantage of the new service.
  * The *CartController* class indicates that it needs a *Cart* object by declaring a constructor argument, which has allowed the removal of the methods that read and write data from the session and the steps required to write updates. The result is a controller that is simpler and remains focused on its role in the application without having to worry about how *Cart* objects are created or persisted. And, since services are available throughout the application, any component can get hold of the user’s cart using the same technique.
+
+
+
+
+
+&nbsp;
+### Complete the Cart Functionality
+
+* After introducing the *Cart service*, the cart functionality can be completed by allowing the customer to remove an item from the cart and by displaying a summary of the cart at the top of the page.
+
+&nbsp;
+### 42 Remove Items from the Cart
+
+* The *RemoveFromCart* action method in the controller has already been defined and tested, so letting the customer remove items is just a matter of exposing this method in a view.
+* Add a *Remove* button in each row of the cart summary.
+* Add a new column to each row of the table that contains a form with hidden input elements that specify the product to be removed and the return URL, along with a button that submits the form.
