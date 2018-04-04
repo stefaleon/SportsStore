@@ -421,3 +421,13 @@ browser, asking the browser to request a new URL. In this case, the browser requ
 * The *SessionCart* class subclasses the *Cart* class and overrides the *AddItem*, *RemoveLine*, and *Clear* methods so they call the base implementations and then store the updated state in the session using the extension methods on the *ISession* interface.
 * The static *GetCart* method is a factory for creating *SessionCart* objects and providing them with an *ISession* object so they can store themselves. The obtained instance of the *IHttpContextAccessor* service provides access to an *HttpContext* object that, in turn,
 provides the *ISession*. This indirect approach is required because the session isn’t provided as a regular service.
+
+
+
+&nbsp;
+### 40 Register the Service
+
+* Create the *Cart Service* in *Startup.cs*.
+* The *AddScoped* method specifies that the same object should be used to satisfy related requests for *Cart* instances. How requests are related can be configured, but by default, it means that any *Cart* required by components handling the same HTTP request will receive the same object. Rather than provide the *AddScoped* method with a type mapping, a lambda expression is invoked to satisfy *Cart* requests. The expression receives the collection of services that have been registered and passes the collection to the *GetCart* method of the
+*SessionCart* class. The result is that requests for the *Cart* service will be handled by creating *SessionCart* objects, which will serialize themselves as session data when they are modified.
+* The *AddSingleton* method specifies that the same object should always be used. The service tells MVC to use the *HttpContextAccessor* class when implementations of the *IHttpContextAccessor* interface are required. This service is required so that the current session in the *SessionCart* class can be accessed.
