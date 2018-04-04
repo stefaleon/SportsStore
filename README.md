@@ -457,3 +457,12 @@ provides the *ISession*. This indirect approach is required because the session 
 * The *RemoveFromCart* action method in the controller has already been defined and tested, so letting the customer remove items is just a matter of exposing this method in a view.
 * Add a *Remove* button in each row of the cart summary.
 * Add a new column to each row of the table that contains a form with hidden input elements that specify the product to be removed and the return URL, along with a button that submits the form.
+
+
+&nbsp;
+### 43 Add the Cart Summary Widget
+
+* Add a widget that summarizes the contents of the cart and that can be clicked to display the cart contents throughout the application. This can be achieved by adding a view component whose output will be included in the Razor shared layout.
+* Add *CartSummaryViewComponent.cs* in the *Components folder* and use it to define the view component. This view component is able to take advantage of the *Cart service* in order to receive a *Cart* object as a constructor argument. The result is a simple view component class that passes on the *Cart* object to the *View* method in order to generate the fragment of HTML that will be included in the layout.
+* Create the *Views/Shared/Components/CartSummary* folder and add *Default.cshtml*. The view displays a button with the Font Awesome cart icon and, if there are items in the cart, provides a snapshot that details the number of items and their total value.
+* Modify the shared layout in `_Layout.cshtml` so that the cart summary is included.
