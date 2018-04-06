@@ -489,3 +489,11 @@ provides the *ISession*. This indirect approach is required because the session 
 * Add a class file called *Order.cs* to the *Models* folder to represent the shipping details for a customer.
 * Use validation attributes from the *System.ComponentModel.DataAnnotations* namespace.
 * Use the *BindNever* attribute, which prevents the user from supplying values for these properties in an HTTP request.
+
+
+&nbsp;
+### 46 Add the Checkout Process
+
+* Add a *Checkout* button to the cart summary view in the *Views/Cart/Index.cshtml* file.
+* Add *OrderController.cs* to the *Controllers* folder. The *Checkout* method returns the default view and passes a new *Order* object as the view model.
+* Create the *Views/Order* folder and add a Razor view file called *Checkout.cshtml*. For each of the properties in the model, create a label element and an input element to capture the user input, formatted with Bootstrap. The *asp-for* attribute on the input elements is handled by a built-in tag helper that generates the *type*, *id*, *name*, and *value* attributes based on the specified model property.
