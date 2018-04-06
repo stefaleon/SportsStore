@@ -473,3 +473,19 @@ provides the *ISession*. This indirect approach is required because the session 
 
 * Add the *lib* folder inside the *wwwroot* folder and inside it add the *css* and *js* folders.
 * Add local copies of *bootstrap.min.css* and *fontawesome.js* and link to these instead of linking to the CDN links in `_Layout.cshtml`.
+
+
+
+
+
+
+&nbsp;
+### Submitting Orders
+
+
+&nbsp;
+### 45 Create the Order Model Class
+
+* Add a class file called *Order.cs* to the *Models* folder to represent the shipping details for a customer.
+* Use validation attributes from the *System.ComponentModel.DataAnnotations* namespace.
+* Use the *BindNever* attribute, which prevents the user from supplying values for these properties in an HTTP request.
