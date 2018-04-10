@@ -523,3 +523,15 @@ $ dotnet ef database drop --force
 ```
 $ dotnet ef database update
 ```
+
+
+&nbsp;
+### 48 Create the Order Repository
+
+* Add a class file called *IOrderRepository.cs* to the *Models* folder and use it to define the *IOrderRepository* interface.
+* To implement the order repository interface, add a class file called *EFOrderRepository.cs* to the *Models* folder and define the class *EFOrderRepository*.
+* This class implements *IOrderRepository* using Entity Framework Core, allowing the set of *Order* objects that have been stored to be retrieved and allowing orders to be created or changed.
+* Entity Framework Core requires instruction to load related data if it spans multiple tables. The *Include* and *ThenInclude* methods specify that when an *Order* object is read from the database, the collection associated with the *Lines* property should also be loaded along with each *Product* object associated with each collection object. This ensures that all the needed data objects are received without having to perform the queries and the data is assembled directly.
+* When the user’s cart data is deserialized from the session store, the JSON package creates new objects that are not known to
+Entity Framework Core, which then tries to write all the objects into the database. For the *Product* objects, this means that EFC tries to write objects that have already been stored, which causes an error. To avoid this problem, EFC is notified that the objects exist and shouldn’t be stored in the database unless they are modified, by use of *AttachRange*. This ensures that EFC won’t try to write the deserialized *Product* objects that are associated with the *Order* object.
+* Register the order repository as a service in the *ConfigureServices* method of the *Startup* class.

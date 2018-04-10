@@ -26,6 +26,7 @@ namespace SportsStore
             services.AddSession();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
