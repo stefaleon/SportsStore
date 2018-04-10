@@ -497,3 +497,29 @@ provides the *ISession*. This indirect approach is required because the session 
 * Add a *Checkout* button to the cart summary view in the *Views/Cart/Index.cshtml* file.
 * Add *OrderController.cs* to the *Controllers* folder. The *Checkout* method returns the default view and passes a new *Order* object as the view model.
 * Create the *Views/Order* folder and add a Razor view file called *Checkout.cshtml*. For each of the properties in the model, create a label element and an input element to capture the user input, formatted with Bootstrap. The *asp-for* attribute on the input elements is handled by a built-in tag helper that generates the *type*, *id*, *name*, and *value* attributes based on the specified model property.
+
+
+
+&nbsp;
+### Implementing Order Processing
+
+* Process orders by writing them to the database.
+
+&nbsp;
+### 47 Extend the Database
+
+* Add the *Orders* property to the database context class. This change is enough for Entity Framework Core to create a database migration that will allow *Order* objects to be stored in the database.
+* Create the migration: `$ dotnet ef migrations add Orders`. This command tells Entity Framework Core to take a new snapshot of the application data model, work out how it differs from the previous database version, and generate a new migration called *Orders*. The new
+migration will be applied automatically when the application starts because *SeedData* calls the Migrate method provided by Entity Framework Core.
+
+&nbsp;
+### Resetting the database
+
+* When frequent changes are made to the model, the migrations and database schema may get out of sync. During development, the easiest thing to do is delete the database and start over:
+```
+$ dotnet ef database drop --force
+```
+* Once the database has been removed, re-create the database and apply the migrations:
+```
+$ dotnet ef database update
+```
