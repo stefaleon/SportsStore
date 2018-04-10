@@ -535,3 +535,13 @@ $ dotnet ef database update
 * When the user’s cart data is deserialized from the session store, the JSON package creates new objects that are not known to
 Entity Framework Core, which then tries to write all the objects into the database. For the *Product* objects, this means that EFC tries to write objects that have already been stored, which causes an error. To avoid this problem, EFC is notified that the objects exist and shouldn’t be stored in the database unless they are modified, by use of *AttachRange*. This ensures that EFC won’t try to write the deserialized *Product* objects that are associated with the *Order* object.
 * Register the order repository as a service in the *ConfigureServices* method of the *Startup* class.
+
+
+
+&nbsp;
+### 49 Complete the Order Controller
+
+* Modify the constructor so that it receives the services it requires to process an order. The constructor takes two parameters, one for an *IOrderRepository* and one for a *Cart*.
+* Add a new action method that will handle the HTTP form POST request when the user clicks the *Complete Order* button.
+* The *Checkout* action method is decorated with the **HttpPost** attribute, which means that it will be invoked for a POST request — in this case, when the user submits the form. By use of the *model binding* system, the *Order* object is being received, completed using data from the Cart and then stored in the repository.
+* MVC checks the validation constraints applied to the *Order* class using the *data annotation* attributes, and any validation problems are passed to the action method through the *ModelState* property. The *ModelState.AddModelError* method registers an error message if there are no items in the cart and the *ModelState.IsValid* property checks if there are any problems.
