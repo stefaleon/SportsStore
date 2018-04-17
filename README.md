@@ -545,3 +545,16 @@ Entity Framework Core, which then tries to write all the objects into the databa
 * Add a new action method that will handle the HTTP form POST request when the user clicks the *Complete Order* button.
 * The *Checkout* action method is decorated with the **HttpPost** attribute, which means that it will be invoked for a POST request — in this case, when the user submits the form. By use of the *model binding* system, the *Order* object is being received, completed using data from the Cart and then stored in the repository.
 * MVC checks the validation constraints applied to the *Order* class using the *data annotation* attributes, and any validation problems are passed to the action method through the *ModelState* property. The *ModelState.AddModelError* method registers an error message if there are no items in the cart and the *ModelState.IsValid* property checks if there are any problems.
+
+
+
+
+&nbsp;
+### 50 Unit Testing for the OrderController class
+
+* Add *OrderControllerTests.cs* in the *SportsStore.Tests* project.
+* The *Cannot_Checkout_Empty_Cart* test ensures that check out cannot be performed with an empty cart. This is checked by ensuring that *SaveOrder* of the mock *IOrderRepository* implementation is never called, that the view the method returns is the default view (which will redisplay the data entered by customers and give them a chance to correct it), and that the model state being passed to the view has been marked as invalid.
+* The *Cannot_Checkout_Invalid_ShippingDetails* test method works in much the same way but injects an error into the view model to simulate a problem reported by
+the model binder (which would happen in production when the customer enters invalid shipping data).
+* The *Can_Checkout_And_Submit_Order* test ensures that orders are processed normally when appropriate.
+* There is no need to test the identification of valid shipping details. This is handled automatically by the model binder using the attributes applied to the properties of the Order class.
