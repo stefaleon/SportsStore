@@ -571,3 +571,14 @@ the model binder (which would happen in production when the customer enters inva
 
 *The data submitted by the user is sent to the server before it is validated, which is known as server-side validation and for which MVC has excellent support. The problem with server-side validation is that the user isn’t told about errors until after the data has been sent to the server and processed and the result page
 has been generated — something that can take a few seconds on a busy server. For this reason, server-side validation is usually complemented by client-side validation, where JavaScript is used to check the values that the user has entered before the form data is sent to the server.*
+
+
+
+
+&nbsp;
+### 52 Display a Summary Page
+
+* To complete the checkout process, create the view that will be shown when the browser is redirected to the *Completed* action on the *Order* controller.
+* Add a Razor view file called *Completed.cshtml* to the Views/Order folder.
+* The required statements to integrate this view into the application have already been added in the definition of the *Completed* action method.
+*  Now customers can go through the entire process, from selecting products to checking out. If they provide valid shipping details (and have items in their cart), they will see the summary page when they click the *Complete Order* button.
