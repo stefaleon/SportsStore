@@ -558,3 +558,16 @@ Entity Framework Core, which then tries to write all the objects into the databa
 the model binder (which would happen in production when the customer enters invalid shipping data).
 * The *Can_Checkout_And_Submit_Order* test ensures that orders are processed normally when appropriate.
 * There is no need to test the identification of valid shipping details. This is handled automatically by the model binder using the attributes applied to the properties of the Order class.
+
+
+
+
+&nbsp;
+### 51 Display Validation Errors
+
+* MVC will use the validation attributes applied to the *Order* class to validate user data.
+* Use the built-in tag helper that inspects the validation state of the data provided by the user and adds warning messages for each problem that has been discovered.
+* Add an HTML element that will be processed by the tag helper to the *Checkout.cshtml* file.
+
+*The data submitted by the user is sent to the server before it is validated, which is known as server-side validation and for which MVC has excellent support. The problem with server-side validation is that the user isn’t told about errors until after the data has been sent to the server and processed and the result page
+has been generated — something that can take a few seconds on a busy server. For this reason, server-side validation is usually complemented by client-side validation, where JavaScript is used to check the values that the user has entered before the form data is sent to the server.*
