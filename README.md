@@ -582,3 +582,26 @@ has been generated — something that can take a few seconds on a busy server. F
 * Add a Razor view file called *Completed.cshtml* to the Views/Order folder.
 * The required statements to integrate this view into the application have already been added in the definition of the *Completed* action method.
 *  Now customers can go through the entire process, from selecting products to checking out. If they provide valid shipping details (and have items in their cart), they will see the summary page when they click the *Complete Order* button.
+
+
+
+
+
+
+&nbsp;
+&nbsp;
+### Managing Orders
+
+* Create a simple administration tool to view the orders that have been received and mark them as shipped.
+
+
+
+&nbsp;
+### 53 Enhance the Model
+
+* Enhance the model so that it can record which orders have been shipped. Add the *Shipped* property to the *Order* class, which is defined in the *Order.cs* file in the Models folder.
+* To update the database to reflect the addition of the *Shipped* property to the *Order* class, open a new command prompt or PowerShell window, navigate to the *SportsStore* project folder (which is the one that contains the *Startup.cs* file) and run the migration:
+```
+$ dotnet ef migrations add ShippedOrders
+```
+* The migration will be applied automatically when the application is started and the *SeedData* class calls the *Migrate* method provided by Entity Framework Core.
