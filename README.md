@@ -605,3 +605,23 @@ has been generated — something that can take a few seconds on a busy server. F
 $ dotnet ef migrations add ShippedOrders
 ```
 * The migration will be applied automatically when the application is started and the *SeedData* class calls the *Migrate* method provided by Entity Framework Core.
+
+
+
+
+&nbsp;
+### 54 Add the Actions and View
+
+* The functionality required to display and update the set of orders in the database is relatively simple because it builds on the features and infrastructure created previously.
+* Add two new action methods to the *Order* controller.
+  * The *List* method selects all the *Order* objects in the repository that have a *Shipped* value of false and passes them to the default view. This is the action method that will display a list of the unshipped orders to the administrator.
+  * The *MarkShipped* method will receive a POST request that specifies the ID of an order, which is used to locate the corresponding *Order* object from the repository so that the *Shipped* property can be set to true and saved.
+
+* To display the list of unshipped orders, add a Razor view file called *List.cshtml* to the *Views/Order* folder. A table element is used to display some of the details from each order, including details of which products have been purchased.
+* Each order is displayed with a *Ship* button that submits a form to the *MarkShipped* action method.
+* Create *_AdminLayout.cshtml* in the *Views/Shared* folder.
+* Use *_AdminLayout.cshtml* to specify a different layout for the *List* view using the *Layout* property, which overrides the layout specified in the *_ViewStart.cshtml* file.
+
+* To see and manage the orders in the application, start the application, select some products, and then check out. Then navigate to the */Order/List* URL and see a summary of the created order.By clicking the *Ship* button, the database will be updated, and the list of pending orders will be empty.
+
+■ Note: at the moment, there is nothing to stop customers from requesting the */Order/List* URL and administering their own orders. Additional code to restrict access to action methods will be added later.
