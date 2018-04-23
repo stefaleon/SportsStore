@@ -1,7 +1,6 @@
-﻿
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SportsStore.Models;
+using System.Linq;
 
 namespace SportsStore.Controllers
 {
@@ -13,6 +12,10 @@ namespace SportsStore.Controllers
             repository = repo;
         }
         public ViewResult Index() => View(repository.Products);
+
+        public ViewResult Edit(int productId) =>
+            View(repository.Products
+                .FirstOrDefault(p => p.ProductID == productId));
     }
 }
 

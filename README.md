@@ -658,3 +658,15 @@ $ dotnet ef migrations add ShippedOrders
 * See how the products are displayed by starting the application and requesting the */Admin/Index* URL.
 
 ■ Tip: the *Edit* button is inside the form element so that the two buttons sit next to each other, working around the spacing that Bootstrap applies. The *Edit* button will send an HTTTP GET request to the server to get the current details of a product; this doesn’t require a form element. However, since the *Delete* button will make a change to the application state, an http POST request must be used—and that does require the form element.
+
+
+
+&nbsp;
+### 58 Create the Edit Action Method
+
+* Add the *Edit* action method to the *Admin* controller. It will receive the HTTP request sent by the browser when the user clicks an *Edit* button.
+* This simple method finds the product with the ID that corresponds to the *productId* parameter and passes it as a view model object to the *View* method.
+
+### Unit test the Edit Action Method
+
+* Test for two behaviors in the *Edit* action method. The first is that we get the correct product when a valid ID value is provided, to make sure that the expected product is being edited . The second behavior to test is that no product is returned at all when an ID value that is not in the repository is requested. Add two test methods to the *AdminControllerTests.cs* class file.
