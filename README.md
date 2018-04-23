@@ -648,3 +648,13 @@ $ dotnet ef migrations add ShippedOrders
 * The behavior for the *Index* method of the *Admin* controller is that it correctly returns the *Product* objects that are in the repository.
 * Test this by creating a mock repository implementation and comparing the test data with the data returned by the action method. Create a new unit test file called *AdminControllerTests.cs* in the *SportsStore.UnitTests* project.
 * Add a *GetViewModel* method to the test to unpack the result from the action method and get the view model data.
+
+
+&nbsp;
+### 57 Implement the List View
+
+* Add a view for the *Index* action method of the *Admin* controller. Create the *Views/Admin* folder and add a Razor file called *Index.cshtml*.
+* This view contains a table that has a row for each product with cells that contain the name of the product, the price, and buttons that will allow the product to be edited or deleted by sending requests to *Edit* and *Delete* actions. In addition to the table, there is an *Add* Product button that targets the *Create* action.
+* See how the products are displayed by starting the application and requesting the */Admin/Index* URL.
+
+■ Tip: the *Edit* button is inside the form element so that the two buttons sit next to each other, working around the spacing that Bootstrap applies. The *Edit* button will send an HTTTP GET request to the server to get the current details of a product; this doesn’t require a form element. However, since the *Delete* button will make a change to the application state, an http POST request must be used—and that does require the form element.
