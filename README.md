@@ -625,3 +625,18 @@ $ dotnet ef migrations add ShippedOrders
 * To see and manage the orders in the application, start the application, select some products, and then check out. Then navigate to the */Order/List* URL and see a summary of the created order.By clicking the *Ship* button, the database will be updated, and the list of pending orders will be empty.
 
 ■ Note: at the moment, there is nothing to stop customers from requesting the */Order/List* URL and administering their own orders. Additional code to restrict access to action methods will be added later.
+
+
+
+&nbsp;
+### Add Catalog Management
+
+* The convention for managing more complex collections of items is to present the user with two types of pages: a list page and an edit page. Together, these pages allow a user to create, read, update, and delete items in the collection. Collectively, these actions are known as *CRUD*.
+
+
+&nbsp;
+### 55 Create a CRUD Controller
+
+* Create a separate controller for managing the product catalog. Add *AdminController.cs* to the *Controllers* folder.
+* The controller constructor declares a dependency on the *IProductRepository* interface, which will be resolved when instances are created.
+* The controller defines a single action method, *Index*, that calls the *View* method to select the default view for the action, passing the set of products in the database as the view model.
