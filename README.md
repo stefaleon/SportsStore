@@ -640,3 +640,11 @@ $ dotnet ef migrations add ShippedOrders
 * Create a separate controller for managing the product catalog. Add *AdminController.cs* to the *Controllers* folder.
 * The controller constructor declares a dependency on the *IProductRepository* interface, which will be resolved when instances are created.
 * The controller defines a single action method, *Index*, that calls the *View* method to select the default view for the action, passing the set of products in the database as the view model.
+
+
+&nbsp;
+### 56 Unit test the index action
+
+* The behavior for the *Index* method of the *Admin* controller is that it correctly returns the *Product* objects that are in the repository.
+* Test this by creating a mock repository implementation and comparing the test data with the data returned by the action method. Create a new unit test file called *AdminControllerTests.cs* in the *SportsStore.UnitTests* project.
+* Add a *GetViewModel* method to the test to unpack the result from the action method and get the view model data.
