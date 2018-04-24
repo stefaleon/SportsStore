@@ -32,6 +32,8 @@ namespace SportsStore.Controllers
                 return View(product);
             }
         }
+
+        public ViewResult Create() => View("Edit", new Product());
     }
 }
 

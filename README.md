@@ -750,3 +750,18 @@ JavaScript.
 * The first step is to add the JavaScript libraries that provide the client-side feature to the application. Since *Bower* is deprecated, and it is safer not to depend production builds on CDNs, manually download and add *jquery-3.3.1.min.js*, *jquery.validate.min.js* and *jquery.validate.unobtrusive.min.js* inside the *SportsStore/wwwroot/lib/js/* folder.
 * Then add the JavaScript files to the *_AdminLayout.cshtml* layout so they are loaded when the SportsStore administration features are used.
 * Enabling client-side validation doesn’t cause any visual change, but the constraints specified by the attributes applied to the C# model class are enforced at the browser, preventing the user from submitting the form with bad data and providing immediate feedback when there is a problem.
+
+
+
+
+
+&nbsp;
+### 66 Create New Products
+
+* Implement the *Create* action method, which is the one specified by the *Add Product* link in the main product list page. This will allow the administrator to add new items to the product catalog.
+* Adding the ability to create new products will require one small addition to the application. This is a great example of the power and flexibility of a well-structured MVC application.
+* Add the *Create* method to the *AdminController*.
+* The *Create* method does not render its default view. Instead, it specifies that the *Edit* view should be used. It is perfectly acceptable for one action method to use a view that is usually associated with another view. In this case, provide a new *Product* object as the view model so that the *Edit* view is populated with empty fields.
+* That is the only change that is required because the *Edit* action method is already set up to receive *Product* objects from the model binding system and store them in the database. This functionality can be tested by starting the application, navigating to */Admin/Index*, clicking the *Add Product* button, and populating and submitting the form. The details specified in the form will be used to create a new product in the database, which will then appear in the list.
+
+■ Note: We have not added a unit test for this action method. Doing so would only be testing the ASP.NET Core MVC ability to process the result from the action method result, which is something you can take for granted. (Tests are not usually written for framework features unless you suspect there is a defect.)
