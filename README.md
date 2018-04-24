@@ -738,3 +738,15 @@ the development process and demonstrate how services can be used to seamlessly r
 * The tag helpers will insert an error message into the span element and add the element to the input-validation-error class, which makes it easy to apply CSS styles to error message elements. Add some extra CSS styling to the *_AdminLayout.cshtml* file in the *Views/Shared* folder. The defined CSS style selects elements that are members of the input-validation-error class and applies a red border and background color.
 
 ■ Tip: Explicitly setting styles when using a CSS library like Bootstrap can cause inconsistencies when content themes are applied. There is an alternative approach that uses JavaScript code to apply Bootstrap classes to elements with validation errors, which keeps everything consistent but is also more complex.
+
+
+
+&nbsp;
+### 65 Enable Client-Side Validation
+
+* Currently, data validation is applied only when the administration user submits edits to the server, but most users expect immediate feedback if there are problems with the data they have entered. This is why developers often want to perform client-side validation, where the data is checked in the browser using
+JavaScript.
+* MVC applications can perform client-side validation based on the data annotations applied to the domain model class.
+* The first step is to add the JavaScript libraries that provide the client-side feature to the application. Since *Bower* is deprecated, and it is safer not to depend production builds on CDNs, manually download and add *jquery-3.3.1.min.js*, *jquery.validate.min.js* and *jquery.validate.unobtrusive.min.js* inside the *SportsStore/wwwroot/lib/js/* folder.
+* Then add the JavaScript files to the *_AdminLayout.cshtml* layout so they are loaded when the SportsStore administration features are used.
+* Enabling client-side validation doesn’t cause any visual change, but the constraints specified by the attributes applied to the C# model class are enforced at the browser, preventing the user from submitting the form with bad data and providing immediate feedback when there is a problem.

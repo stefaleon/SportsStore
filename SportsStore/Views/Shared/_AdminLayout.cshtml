@@ -10,6 +10,9 @@
             background-color: #fee;
         }
     </style>
+    <script src="~/lib/js/jquery-3.3.1.min.js"></script>
+    <script src="~/lib/js/jquery.validate.min.js"></script>
+    <script src="~/lib/js/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body class="m-1 p-1">
     <div class="bg-info p-2"><h4>@ViewBag.Title</h4></div>
@@ -18,5 +21,6 @@
         <div class="alert alert-success">@TempData["message"]</div>
     }
     @RenderBody()
+    
 </body>
 </html>
