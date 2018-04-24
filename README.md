@@ -708,3 +708,10 @@ the development process and demonstrate how services can be used to seamlessly r
 * ViewBag cannot be used in this situation because it passes data between the controller and view and it cannot hold data for longer than the current HTTP request. When an edit succeeds, the browser is redirected to a new URL, so the ViewBag data is lost.
 * The session data feature could be used, but then the message would be persistent until explicitly removed.
 * So, the *temp data* feature is the perfect fit. The data is restricted to a single user’s session (so that users do not see each other’s *TempData*) and will persist long enough to be read in the view rendered by the action method the user has been redirected to.
+
+
+&nbsp;
+### 62 Unit test Edit submissions
+
+* For the POST-processing *Edit* action method, we need to make sure that valid updates to the *Product* object, which is received as the method argument, are passed to the product repository to be saved. We also want to check that invalid updates (where a model validation error exists) are not passed to the repository.
+* Add the *Can_Save_Valid_Changes* and *Cannot_Save_Invalid_Changes* test methods to the *AdminControllerTests.cs* file.
