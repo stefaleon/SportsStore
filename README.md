@@ -724,3 +724,17 @@ the development process and demonstrate how services can be used to seamlessly r
 * By handling the message in the template, messages can be created in any view that uses the template without needing to create additional Razor expressions.
 
 ■ Tip: The benefit of dealing with the message in the template like this is that users will see it displayed on whatever page is rendered after they have saved a change. At the moment they are returned to the list of products, but the workflow could be changed in order to render some other view, and the users will still see the message (as long as the next view also uses the same layout). Now all the pieces are in place to edit products. To see how it all works, start the application, navigate to the */Admin/Index* URL, click the *Edit* button, and make a change. Click the *Save button*. You will be redirected to the */Admin/Index* URL, and the *TempData* message will be displayed. The message will disappear if you reload the product list screen because *TempData* is deleted when it is read. That is convenient since we do not want old messages hanging around.
+
+
+
+
+&nbsp;
+### 64 Add Model Validation
+
+* Add validation rules to the model classes. At the moment, the administrator could enter negative prices or blank descriptions, and SportsStore would happily store that data in the database. Whether or not the bad data would be successfully persisted would depend on whether it conformed to the constraints in the SQL tables created by Entity Framework Core, and that is not enough protection for most applications.
+* To guard against bad data values, decorate the properties of the *Product* class with attributes.
+* Use tag helpers to display validation error messages next to individual form elements in the *Edit* view. It is conventional (and sensible) to put it somewhere near the problem element to give the user some context.
+* When applied to a span element, the *asp-validation-for* attribute applies a tag helper that will add a validation error message for the specified property if there are any validation problems.
+* The tag helpers will insert an error message into the span element and add the element to the input-validation-error class, which makes it easy to apply CSS styles to error message elements. Add some extra CSS styling to the *_AdminLayout.cshtml* file in the *Views/Shared* folder. The defined CSS style selects elements that are members of the input-validation-error class and applies a red border and background color.
+
+■ Tip: Explicitly setting styles when using a CSS library like Bootstrap can cause inconsistencies when content themes are applied. There is an alternative approach that uses JavaScript code to apply Bootstrap classes to elements with validation errors, which keeps everything consistent but is also more complex.
