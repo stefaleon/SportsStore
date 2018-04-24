@@ -715,3 +715,12 @@ the development process and demonstrate how services can be used to seamlessly r
 
 * For the POST-processing *Edit* action method, we need to make sure that valid updates to the *Product* object, which is received as the method argument, are passed to the product repository to be saved. We also want to check that invalid updates (where a model validation error exists) are not passed to the repository.
 * Add the *Can_Save_Valid_Changes* and *Cannot_Save_Invalid_Changes* test methods to the *AdminControllerTests.cs* file.
+
+
+&nbsp;
+### 63 Display a Confirmation Message
+
+* Use the message stored using *TempData* in the *_AdminLayout.cshtml* layout file.
+* By handling the message in the template, messages can be created in any view that uses the template without needing to create additional Razor expressions.
+
+■ Tip: The benefit of dealing with the message in the template like this is that users will see it displayed on whatever page is rendered after they have saved a change. At the moment they are returned to the list of products, but the workflow could be changed in order to render some other view, and the users will still see the message (as long as the next view also uses the same layout). Now all the pieces are in place to edit products. To see how it all works, start the application, navigate to the */Admin/Index* URL, click the *Edit* button, and make a change. Click the *Save button*. You will be redirected to the */Admin/Index* URL, and the *TempData* message will be displayed. The message will disappear if you reload the product list screen because *TempData* is deleted when it is read. That is convenient since we do not want old messages hanging around.
