@@ -694,3 +694,17 @@ $ dotnet ef migrations add ShippedOrders
 * The object passed to the *SaveChanges* method is created by the MVC model binding feature, which means that Entity Framework Core does not know anything about the new Product object and will not apply an update to the database when it is modified. The simplest way of resolving this issue is to locate the corresponding object that Entity Framework Core does know about and update it explicitly.
 * The addition of a new method in the *IProductRepository* interface has broken the fake repository class. *FakeProductRepository* has been used to kick-start
 the development process and demonstrate how services can be used to seamlessly replace interface implementations without needing to modify the components that rely on them. It is not needed any further, so the interface is removed from the class declaration so that there will be no need to keep modifying the class as repository features are being added.
+
+
+
+
+&nbsp;
+### 61 Handle Edit POST Requests
+
+* Implement an overload of the *Edit* action method in the *Admin* controller that will handle POST requests when the administrator clicks the *Save* button.
+* Check if the model binding process has been able to validate the data submitted by the user by reading the value of the *ModelState.IsValid* property. If everything is OK, save the changes to the repository and redirect the user to the *Index* action so they see the modified list of products.
+* If there is a problem with the data, render the default view again so that the user can make corrections.
+* After the changes have been saved in the repository, store a message using the *temp data* feature, which is part of the ASP.NET Core **session state** feature. This is a key/value dictionary similar to the session data and view bag features. The key difference from *session data* is that *temp data* persists until it is read.
+* ViewBag cannot be used in this situation because it passes data between the controller and view and it cannot hold data for longer than the current HTTP request. When an edit succeeds, the browser is redirected to a new URL, so the ViewBag data is lost.
+* The session data feature could be used, but then the message would be persistent until explicitly removed.
+* So, the *temp data* feature is the perfect fit. The data is restricted to a single user’s session (so that users do not see each other’s *TempData*) and will persist long enough to be read in the view rendered by the action method the user has been redirected to.
