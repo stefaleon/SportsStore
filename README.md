@@ -827,3 +827,10 @@ administration functions by password-protecting them.
 
 * Define the connection string for the users database. Make the addition to the *appsettings.json* file. It follows the same format as the connection string defined for the product database.
 * The addition in the listing defines a connection string called *SportsStoreIdentity* that specifies a LocalDB database called *Identity*.
+
+
+&nbsp;
+### 71 Configure the Application
+
+* Like other ASP.NET Core features, Identity is configured in the Start class. Make additions in *Startup.cs* using the context class and connection string defined previously.
+* In the *ConfigureServices* method, extend the Entity Framework Core configuration to register the context class and use the *AddIdentity* method to set up the Identity services using the built-in classes to represent users and roles. In the *Configure* method, call the *UseAuthentication* method to set up the components that will intercept requests and responses to implement the security policy.
