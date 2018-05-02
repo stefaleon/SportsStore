@@ -765,3 +765,13 @@ JavaScript.
 * That is the only change that is required because the *Edit* action method is already set up to receive *Product* objects from the model binding system and store them in the database. This functionality can be tested by starting the application, navigating to */Admin/Index*, clicking the *Add Product* button, and populating and submitting the form. The details specified in the form will be used to create a new product in the database, which will then appear in the list.
 
 ■ Note: We have not added a unit test for this action method. Doing so would only be testing the ASP.NET Core MVC ability to process the result from the action method result, which is something you can take for granted. (Tests are not usually written for framework features unless you suspect there is a defect.)
+
+
+
+
+&nbsp;
+### 67 Delete Products
+
+* Adding support for deleting items is also simple. The first step is to add the *DeleteProduct* method to the *IProductRepository* interface.
+* Next, implement this method in the Entity Framework Core repository class, *EFProductRepository*.
+* The final step is to implement a *Delete* action method in the *Admin* controller. This action method should support only POST requests because deleting objects is not an idempotent operation. Browsers and caches are free to make GET requests without the user’s explicit consent, so we have to be careful to avoid making changes as a consequence of GET requests.
