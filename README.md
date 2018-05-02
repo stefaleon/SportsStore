@@ -239,6 +239,9 @@ to break the literal string into separate lines unless the string you are compar
 
 
 &nbsp;
+## SportsStore: Navigation
+
+&nbsp;
 ### 23 Filter the Product List by Category
 
 * Add the *CurrentCategory* property in *ProductsListViewModel .cs*.
@@ -333,7 +336,7 @@ the same dependency injection feature used in the controller, and it has the sam
 
 
 &nbsp;
-### Building the Shopping Cart
+## Building the Shopping Cart
 
 
 &nbsp;
@@ -407,9 +410,11 @@ browser, asking the browser to request a new URL. In this case, the browser requ
 * Create the *Views/Cart* folder and add to it a Razor view file called *Index.cshtml*. The view enumerates the lines in the cart and adds rows for each of them to an HTML table, along with the total cost per line and the total cost for the cart.
 
 
-
+&nbsp;
+## SportsStore: Completing the Cart
 
 &nbsp;
+
 ### Refine the Cart Model with a Service
 
 * Use the **services** feature that sits at the heart of ASP.NET Core to simplify the way that *Cart* objects are managed, freeing individual components such as the *CartController* from needing to deal with the details directly.
@@ -480,7 +485,7 @@ provides the *ISession*. This indirect approach is required because the session 
 
 
 &nbsp;
-### Submitting Orders
+## Submitting Orders
 
 
 &nbsp;
@@ -586,9 +591,11 @@ has been generated — something that can take a few seconds on a busy server. F
 
 
 
-
-
 &nbsp;
+## SportsStore: Administration
+
+
+
 &nbsp;
 ### Managing Orders
 
@@ -786,3 +793,30 @@ JavaScript.
 * You can see the delete feature by starting the application, navigating to */Admin/Index*, and clicking one of the *Delete* buttons in the product list page. We have taken advantage of the *TempData* variable to display a message when a product is deleted from the catalog.
 
 ■ Note: You will find that you get an error if you delete a product for which you have previously created an order. When an *Order* object is stored in the database, it is transformed into an entry in a database table that contains a reference to the *Product* object with which it is associated, known as a **foreign key relationship**. This means that, by default, the database won’t allow a *Product* object to be deleted if an *Order* has been created for that *Product* because doing so would create an inconsistency in the database. There are a number of ways to approach this issue, including automatically deleting *Order* objects when the *Product* they relate to is deleted or changing the relationship between *Product* and *Order* objects. See the entity Framework Core documentation for details.
+
+
+
+
+&nbsp;
+## SportsStore: Security and Deployment
+
+
+* We have added support for administering the SportsStore application. Now anyone could modify the product catalog if we deploy the application as it is. All they would need to know is that the administration features are available using the */Admin/Index* and */Order/List* URLs. We have to prevent random people from using the
+administration functions by password-protecting them.
+
+&nbsp;
+### Securing the Administration Features
+* Authentication and authorization are provided by the ASP.NET Core **Identity** system, which integrates neatly into both the ASP.NET Core platform and MVC applications. We will create a basic security setup that allows one user, called *Admin*, to authenticate and access the administration features in the application. ASP.NET Core Identity provides many more features for authenticating users and authorizing access to application features and data and lets you create and manage user accounts, use roles and policies, and support authentication from third parties such as Microsoft, Google, Facebook, and Twitter. Here we will just get enough functionality in place to prevent customers from being able to access the sensitive parts of the *SportsStore* application.
+
+&nbsp;
+### Creating the Identity Database
+
+* The ASP.NET Identity system is endlessly configurable and extensible and supports lots of options for how its user data is stored. We will use the most common, which is to store the data using Microsoft SQL Server accessed using Entity Framework Core.
+
+
+&nbsp;
+### 69 Create the Context Class
+
+* Create a database context file that will act as the bridge between the database and the Identity model objects it provides access to. Add a class file called *AppIdentityDbContext.cs* to the Models folder.
+* The *AppIdentityDbContext* class is derived from *IdentityDbContext*, which provides Identity-specific features for Entity Framework Core. For the type parameter, use the *IdentityUser* class, which is the built-in class used to represent users.
+* We could as well have used a custom class that we would be able to extend to add extra information about the users of the application.
