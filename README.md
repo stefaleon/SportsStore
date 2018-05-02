@@ -850,3 +850,15 @@ $ dotnet ef migrations add Initial --context AppIdentityDbContext
 $ dotnet ef database update --context AppIdentityDbContext
 ```
 * The result is a new LocalDB database called *Identity* that you can inspect using the Visual Studio SQL Server Object Explorer.
+
+
+
+&nbsp;
+### 73 Define the Seed Data
+
+* Explicitly create the *Admin* user by seeding the database when the application starts. Add a class file called *IdentitySeedData.cs* to the *Models* folder and define the static class.
+* This code uses the UserManager<T> class, which is provided as a service by ASP.NET Core Identity for managing users, as described in Chapter 28. The database is searched for the *Admin* user account, which is created—with a password of *Secret123$* —if it is not present. Do not change the hard-coded password in this example because Identity has a validation policy that requires passwords to contain a number and range of characters.
+
+■ Caution: Hard-coding the details of an administrator account is often required so that you can log into an application once it has been deployed and start administering it. When you do this, you must remember to change the password for the account you have created.
+
+* To ensure that the Identity database is seeded when the application starts, add a statement to the *Configure* method of the *Startup* class.
