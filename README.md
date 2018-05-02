@@ -834,3 +834,19 @@ administration functions by password-protecting them.
 
 * Like other ASP.NET Core features, Identity is configured in the Start class. Make additions in *Startup.cs* using the context class and connection string defined previously.
 * In the *ConfigureServices* method, extend the Entity Framework Core configuration to register the context class and use the *AddIdentity* method to set up the Identity services using the built-in classes to represent users and roles. In the *Configure* method, call the *UseAuthentication* method to set up the components that will intercept requests and responses to implement the security policy.
+
+
+
+&nbsp;
+### 72 Create and Apply the Database Migration
+
+* The basic configuration is in place, and it is time to use the Entity Framework Core migrations feature to define the schema and apply it to the database. Open a new command prompt or PowerShell window and run the following command in the SportsStore project folder to create a new migration for the Identity database:
+```
+$ dotnet ef migrations add Initial --context AppIdentityDbContext
+```
+* The important difference from previous database commands is that we have used the `-context` argument to specify the name of the context class associated with the database that I want to work with, which is *AppIdentityDbContext*. When you have multiple databases in the application, it is important to ensure that you are working with the right context class.
+* Once Entity Framework Core has generated the initial migration, run the following command to create the database and run the migration commands:
+```
+$ dotnet ef database update --context AppIdentityDbContext
+```
+* The result is a new LocalDB database called *Identity* that you can inspect using the Visual Studio SQL Server Object Explorer.
