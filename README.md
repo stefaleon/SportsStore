@@ -775,3 +775,14 @@ JavaScript.
 * Adding support for deleting items is also simple. The first step is to add the *DeleteProduct* method to the *IProductRepository* interface.
 * Next, implement this method in the Entity Framework Core repository class, *EFProductRepository*.
 * The final step is to implement a *Delete* action method in the *Admin* controller. This action method should support only POST requests because deleting objects is not an idempotent operation. Browsers and caches are free to make GET requests without the user’s explicit consent, so we have to be careful to avoid making changes as a consequence of GET requests.
+
+
+
+&nbsp;
+### 68 Unit test Delete Products
+
+* Test the basic behavior of the *Delete* action method, which is that when a valid *ProductID* is passed as a parameter, the action method calls the *DeleteProduct* method of the repository and passes the correct *ProductID* value to be deleted. Add the test to the *AdminControllerTests.cs* file.
+
+* You can see the delete feature by starting the application, navigating to */Admin/Index*, and clicking one of the *Delete* buttons in the product list page. We have taken advantage of the *TempData* variable to display a message when a product is deleted from the catalog.
+
+■ Note: You will find that you get an error if you delete a product for which you have previously created an order. When an *Order* object is stored in the database, it is transformed into an entry in a database table that contains a reference to the *Product* object with which it is associated, known as a **foreign key relationship**. This means that, by default, the database won’t allow a *Product* object to be deleted if an *Order* has been created for that *Product* because doing so would create an inconsistency in the database. There are a number of ways to approach this issue, including automatically deleting *Order* objects when the *Product* they relate to is deleted or changing the relationship between *Product* and *Order* objects. See the entity Framework Core documentation for details.
