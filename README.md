@@ -820,3 +820,10 @@ administration functions by password-protecting them.
 * Create a database context file that will act as the bridge between the database and the Identity model objects it provides access to. Add a class file called *AppIdentityDbContext.cs* to the Models folder.
 * The *AppIdentityDbContext* class is derived from *IdentityDbContext*, which provides Identity-specific features for Entity Framework Core. For the type parameter, use the *IdentityUser* class, which is the built-in class used to represent users.
 * We could as well have used a custom class that we would be able to extend to add extra information about the users of the application.
+
+
+&nbsp;
+### 70 Define the Connection String
+
+* Define the connection string for the users database. Make the addition to the *appsettings.json* file. It follows the same format as the connection string defined for the product database.
+* The addition in the listing defines a connection string called *SportsStoreIdentity* that specifies a LocalDB database called *Identity*.
