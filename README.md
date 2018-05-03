@@ -865,7 +865,6 @@ $ dotnet ef database update --context AppIdentityDbContext
 
 
 
-
 &nbsp;
 ### 74 Apply a Basic Authorization Policy
 
@@ -874,3 +873,26 @@ to allow access to any authenticated user. Although this can be a useful policy 
 * The *Authorize* attribute is used to restrict access to action methods. Use the attribute to protect access to the administrative actions in the *Order* controller.
 * We don’t want to stop unauthenticated users from accessing the other action methods in the *Order* controller, so apply the *Authorize* attribute only to the *List* and *MarkShipped* methods.
 * We want to protect all of the action methods defined by the *Admin* controller, and we can do this by applying the *Authorize* attribute to the controller class, which then applies the authorization policy to all the action methods it contains.
+
+
+
+
+&nbsp;
+### 75 Create the Account Controller and Views
+
+* When an unauthenticated user sends a request that requires authorization, they are redirected to the */Account/Login* URL, which the application can use to prompt the user for their credentials. In preparation, add a view model to represent the user’s credentials by adding a class file called *LoginModel.cs* to the *Models/ViewModels* folder.
+* The *Name* and *Password* properties have been decorated with the *Required* attribute, which uses model validation to ensure that values have been provided. The *Password* property has been decorated with the *UIHint* attribute so that when we use the `asp-for` attribute on the input element in the login Razor view, the
+tag helper will set the type attribute to password; that way, the text entered by the user isn’t visible on-screen.
+* Next, add a class file called *AccountController.cs* to the *Controllers* folder and used it to define the controller that will respond to requests to the */Account/Login* URL.
+* When the user is redirected to the */Account/Login* URL, the GET version of the *Login* action method renders the default view for the page, providing a view model object that includes the URL that the browser should be redirected to if the authentication request is successful.
+* Authentication credentials are submitted to the POST version of the *Login* method, which uses the `UserManager<IdentityUser>` and `SignInManager<IdentityUser>` services that have been received through the controller’s constructor to authenticate the user and log them into the system. If there is an authentication failure, then create a model validation error and render the default view; however, if authentication is successful, then redirect the user to the URL that they want to access before they are prompted for their credentials.
+
+■ Caution: In general, using client-side data validation is a good idea. It offloads some of the work from your server and gives users immediate feedback about the data they are providing. However, you should not be tempted to perform authentication at the client, as this would typically involve sending valid credentials to the client so they can be used to check the username and password that the user has entered, or at least trusting the client’s report of whether they have successfully authenticated. Authentication should always be done at the server.
+
+* To provide the Login method with a view to render, create the *Views/Account* folder and add a Razor view file called *Login.cshtml*.
+* Change the shared administration layout in *_AdminLayout.cshtml* to add a button that will log the current user out by sending a request to the *Logout* action. This is a useful feature that makes it easier to test the application, without which you would need to clear the browser’s cookies in order to return to the unauthenticated state.
+
+### Test the Security Policy
+* Everything is in place, and you can test the security policy by starting the application and requesting the */Admin/Index* URL. Since you are presently unauthenticated and you are trying to target an action that requires authorization, your browser will be redirected to the */Account/Login* URL. Enter `Admin`
+and `Secret123$` as the name and password and submit the form. The *Account* controller will check the credentials you provided with the seed data added to the Identity database and —assuming you entered the right details— authenticate you and redirect you back to the */Admin/Index* URL, to which you now have
+access.
