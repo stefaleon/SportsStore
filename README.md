@@ -862,3 +862,15 @@ $ dotnet ef database update --context AppIdentityDbContext
 ■ Caution: Hard-coding the details of an administrator account is often required so that you can log into an application once it has been deployed and start administering it. When you do this, you must remember to change the password for the account you have created.
 
 * To ensure that the Identity database is seeded when the application starts, add a statement to the *Configure* method of the *Startup* class.
+
+
+
+
+&nbsp;
+### 74 Apply a Basic Authorization Policy
+
+* Apply an authorization policy to the parts of the application that I want to protect. Use the most basic authorization policy possible, which is
+to allow access to any authenticated user. Although this can be a useful policy in real applications as well, there are also options for creating finer-grained authorization controls, but for the SportsStore application, distinguishing between anonymous and authenticated requests is sufficient.
+* The *Authorize* attribute is used to restrict access to action methods. Use the attribute to protect access to the administrative actions in the *Order* controller.
+* We don’t want to stop unauthenticated users from accessing the other action methods in the *Order* controller, so apply the *Authorize* attribute only to the *List* and *MarkShipped* methods.
+* We want to protect all of the action methods defined by the *Admin* controller, and we can do this by applying the *Authorize* attribute to the controller class, which then applies the authorization policy to all the action methods it contains.
